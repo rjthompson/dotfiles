@@ -1,4 +1,113 @@
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Plugins here
+Plugin 'gmarik/Vundle.vim' " Package manager
+Plugin 'tmhedberg/SimpylFold' " Code folding
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+Plugin 'nvie/vim-flake8'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+" All plugins to be added before this line
+call vundle#end()
+
+filetype plugin indent on
+
+" Auto reload vim
+" autocmd! bufwritepost .vimrc source %
+
+" Universal settings
+set number
+set relativenumber
+set splitbelow
+set splitright
+set autoindent
+set copyindent
+set tabstop=4
+set shiftwidth=4
+set showmatch
+set smartcase
+set smarttab
+set incsearch
+set expandtab
+set list
+set listchars=tab:→\ ,trail:●,extends:#,nbsp:.
+set bri " Keep wrapped lines indented appropriately
+
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Moves down wrapped lines where present
+nnoremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+nnoremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+" Insert blank lines
+nnoremap <silent><A-o> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+
+" Syntax Highlighting
+let python_highlight_all=1
 syntax on
 
-" Wrap gitcommit file types at the appropriate length
-filetype indent plugin on
+" Powerline settings
+let g:Powerline_symbols = 'fancy'
+set t_Co=256
+set encoding=utf-8
+set fillchars+=stl:\ ,stlnc:\
+set term=xterm-256color
+set termencoding=utf-8
+
+" Set to use system clipboard
+set clipboard=unnamed
+
+" Enable folding with spacebar
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
+
+" Python specific settings
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+" Matlab specific settings
+
+" YouCompleteMe Customisations
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_path_to_python_interpretter = '/usr/local/bin/python'
+map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_server_keep_logfile=1
+
+" Nerdtree settings
+let NERDTreeIgnore=['\.pyc$', '\~$\'] "ignore files in NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
