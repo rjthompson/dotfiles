@@ -43,7 +43,7 @@ set incsearch
 set expandtab
 set list
 set listchars=tab:→\ ,trail:●,extends:#,nbsp:.
-set bri " Keep wrapped lines indented appropriately
+"set bri " Keep wrapped lines indented appropriately
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
