@@ -44,7 +44,14 @@ set incsearch
 set expandtab
 set list
 set listchars=tab:→\ ,trail:●,extends:#,nbsp:.
-set bri " Keep wrapped lines indented appropriately
+
+" OSX only settings
+if has("unix")
+    let s:uname = system("uname")
+    if s:uname == "Darwin\n"
+        set bri " Keep wrapped lines indented appropriately
+    endif
+endif
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
