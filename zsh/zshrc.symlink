@@ -2,7 +2,8 @@
 export ZSH=$HOME/.dotfiles
 
 # shortcut to powerline repo
-if [[ `uname` == 'Darwin' ]]; then
+if [[ `uname` == 'Darwin' ]]
+then
     export PWRLINE=/usr/local/lib/python2.7/site-packages
 else
     export PWRLINE=$HOME/.local/lib/python2.7/site-packages/

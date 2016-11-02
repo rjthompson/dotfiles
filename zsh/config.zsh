@@ -4,13 +4,17 @@ else
   export PS1='%3~$(git_info_for_prompt)%# '
 fi
 
-export CLICOLOR=true
-export LSCOLORS="gxfxbEaEBxxEhEhBaDaCaD"
+if [[ `uname` == 'Darwin' ]]; then
 
-eval `gdircolors ~/.dir_colors`
-zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-autoload -Uz compinit
-compinit
+    export CLICOLOR=true
+    export LSCOLORS="gxfxbEaEBxxEhEhBaDaCaD"
+    eval `gdircolors ~/.dir_colors`
+    zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+    autoload -Uz compinit
+    compinit
+else
+    eval `dircolors ~/.dotfiles/system/dircolors.256dark`
+fi
 
 fpath=($ZSH/functions $fpath)
 
