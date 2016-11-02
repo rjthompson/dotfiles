@@ -50,6 +50,10 @@ set textwidth=81 " Set wrap at 79 characters allowing for whitespace
 set backspace=2
 set background=dark
 colorscheme solarized
+
+set colorcolumn=80
+highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+
 "Spell checker settings
 highlight clear SpellBad
 highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
