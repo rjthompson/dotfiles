@@ -2,7 +2,11 @@
 export ZSH=$HOME/.dotfiles
 
 # shortcut to powerline repo
-export PWRLINE=/usr/local/lib/python2.7/site-packages
+if [[ `uname` == 'Darwin' ]]
+    export PWRLINE=/usr/local/lib/python2.7/site-packages
+else
+    export PWRLINE=$HOME/.local/lib/python2.7/site-packages/
+fi
 
 # your project folder that we can `c [tab]` to
 export PROJECTS=~/Development
@@ -34,6 +38,8 @@ done
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -U compinit
 compinit
+# load specific functionality
+autoload zmv
 
 # load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}
@@ -42,3 +48,5 @@ do
 done
 
 unset config_files
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
