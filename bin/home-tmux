@@ -1,0 +1,6 @@
+#! /bin/zsh
+
+tmux new-session -d 'vim'
+tmux split-window -h
+tmux split-window -v 'hangups'
+tmux -2 attach-session -d
