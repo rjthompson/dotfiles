@@ -46,7 +46,7 @@ set expandtab
 set list
 set listchars=tab:→\ ,trail:●,extends:#,nbsp:.
 set spelllang=en_gb
-set textwidth=79 " Set wrap at 79 characters allowing for whitespace
+set textwidth=81 " Set wrap at 79 characters allowing for whitespace
 set backspace=2
 set background=dark
 colorscheme solarized
@@ -88,11 +88,6 @@ nnoremap <silent><A-o> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 " Syntax Highlighting
 let python_highlight_all=1
 syntax on
-
-" Powerline settings
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
 
 set laststatus=2
 let g:Powerline_symbols = 'fancy'
@@ -143,13 +138,3 @@ let g:ycm_server_keep_logfile=1
 let NERDTreeIgnore=['\.pyc$', '\~$\'] "ignore files in NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" Python with virtualenv support
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
-EOF
