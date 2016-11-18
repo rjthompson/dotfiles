@@ -17,7 +17,7 @@ export PROJECTS=~/Development
 # you'll have access to them in your scripts.
 if [[ -a ~/.localrc ]]
 then
-  source ~/.localrc
+    source ~/.localrc
 fi
 
 # all of our zsh files
@@ -27,13 +27,13 @@ config_files=($ZSH/**/*.zsh)
 # load the path files
 for file in ${(M)config_files:#*/path.zsh}
 do
-  source $file
+    source $file
 done
 
 # load everything but the path and completion files
 for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
 do
-  source $file
+    source $file
 done
 
 # initialize autocomplete here, otherwise functions won't be loaded
@@ -45,9 +45,21 @@ autoload zmv
 # load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}
 do
-  source $file
+    source $file
 done
 
 unset config_files
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+#Add function for vi mode indicators
+function zle-line-init zle-keymap-select {
+    VIM_PROMPT="%{$fg_bold[yellow]%} [% N]%  %{$reset_color%}"
+    INSERT_PROMPT="%{$fg_bold[yellow]%} [% I]%  %{$reset_color%}"
+    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/$INSERT_PROMPT} $EPS1"
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+export KEYTIMEOUT=1
