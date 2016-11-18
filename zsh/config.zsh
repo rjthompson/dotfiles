@@ -46,7 +46,15 @@ setopt HIST_REDUCE_BLANKS
 #   like: git comm-[tab]
 setopt complete_aliases
 
+# ZLE options
 zle -N newtab
+
+bindkey -v
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^r' history-incremental-search-backward
+
+export KEYTIMEOUT=1
 
 bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
