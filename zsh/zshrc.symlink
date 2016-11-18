@@ -6,7 +6,7 @@ if [[ `uname` == 'Darwin' ]]
 then
     export PWRLINE=/usr/local/lib/python2.7/site-packages
 else
-    export PWRLINE=$HOME/.local/lib/python2.7/site-packages/
+    export PWRLINE=/usr/local/lib/python2.7/dist-packages/powerline
 fi
 
 # your project folder that we can `c [tab]` to
