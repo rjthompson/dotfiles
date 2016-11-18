@@ -54,8 +54,8 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 #Add function for vi mode indicators
 function zle-line-init zle-keymap-select {
-    VIM_PROMPT="%{$fg_bold[yellow]%} [% N]%  %{$reset_color%}"
-    INSERT_PROMPT="%{$fg_bold[yellow]%} [% I]%  %{$reset_color%}"
+    VIM_PROMPT="%{$fg_bold[white]%} [% N]%  %{$reset_color%}"
+    INSERT_PROMPT="%{$fg_bold[cyan]%} [% I]%  %{$reset_color%}"
     RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/$INSERT_PROMPT} $EPS1"
     zle reset-prompt
 }
