@@ -19,6 +19,9 @@ Plugin 'tpope/vim-surround'
 Plugin 'jnurmine/Zenburn'
 Plugin 'lervag/vimtex'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'plasticboy/vim-markdown' " for markdown syntax etc.
+Plugin 'godlygeek/tabular' " for markdown syntax etc.
+
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " All plugins to be added before this line
@@ -46,10 +49,15 @@ set expandtab
 set list
 set listchars=tab:→\ ,trail:●,extends:#,nbsp:.
 set spelllang=en_gb
+set wrap
 set textwidth=81 " Set wrap at 79 characters allowing for whitespace
 set backspace=2
 set background=dark
 colorscheme solarized
+
+if v:version >= 704
+    set breakindent
+endif
 
 set colorcolumn=80
 highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
@@ -68,7 +76,7 @@ highlight SpellLocal term=underline cterm=underline
 if has("unix")
     let s:uname = system("uname")
     if s:uname == "Darwin\n"
-        set bri " Keep wrapped lines indented appropriately
+
     endif
 endif
 
@@ -97,10 +105,6 @@ set fillchars+=stl:\ ,stlnc:\
 set term=xterm-256color
 set termencoding=utf-8
 
-" Set to use system clipboard
-if $TMUX == ''
-    set clipboard+=unnamed
-endif
 
 " Enable folding with spacebar
 set foldmethod=indent
@@ -126,6 +130,9 @@ au BufNewFile,BufRead *.markdown,*.md
     \ set textwidth=0 |
     \ set wrapmargin=0 |
 
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_math = 1
 " Matlab specific settings
 
 " YouCompleteMe Customisations
